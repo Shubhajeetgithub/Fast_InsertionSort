@@ -91,8 +91,8 @@ Generally:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 ```bash
-git clone https://github.com/Shubhajeetgithub/fastsort.git
-cd fastsort
+git clone https://github.com/Shubhajeetgithub/Fast_InsertionSort.git
+cd Fast_InsertionSort
 pip install .
 ```
 
