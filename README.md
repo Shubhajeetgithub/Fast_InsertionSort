@@ -16,6 +16,8 @@ Requirements:
 - numpy
 
 ```bash
+git clone https://github.com/Shubhajeetgithub/Fast_InsertionSort.git
+cd Fast_InsertionSort
 # Create and activate a virtual environment (recommended)
 python -m venv .venv
 source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
@@ -90,22 +92,3 @@ Generally:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-```bash
-git clone https://github.com/Shubhajeetgithub/Fast_InsertionSort.git
-cd Fast_InsertionSort
-pip install .
-```
-
-## Usage
-```py
-import fastsort
-
-arr = [5, 2, 4, 6, 1, 3]
-sorted_arr = fastsort.basic_insertion_sort(arr)
-print(sorted_arr)
-
-# Other available functions:
-# fastsort.binary_search_insertion_sort(arr)
-# fastsort.binary_search_pairing_insertion_sort(arr)
-# fastsort.pairing_insertion_sort(arr)
-```
