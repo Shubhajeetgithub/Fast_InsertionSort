@@ -1,23 +1,27 @@
-from setuptools import setup, Extension
+from setuptools import setup
+from pybind11.setup_helpers import Pybind11Extension, build_ext
 import pybind11
+import sys
+import platform
 
+# Define the extension module
 ext_modules = [
-    Extension(
+    Pybind11Extension(
         "fastsort.fastsort",
         ["fastsort/fastsort.cpp"],
-        include_dirs=[pybind11.get_include()],
+        include_dirs=[
+            # Path to pybind11 headers
+            pybind11.get_include(),
+            pybind11.get_include(user=True)
+        ],
         extra_compile_args=['-std=c++11'],
-        language='c++'
+        cxx_std=11,
     ),
 ]
 
 setup(
-    name="fastsort",
-    version="0.1.0",
-    author="Your Name",
-    description="Fast insertion sort implementations in C++",
-    packages=["fastsort"],
     ext_modules=ext_modules,
+    cmdclass={"build_ext": build_ext},
 )
 import pybind11
 

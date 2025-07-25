@@ -1,3 +1,20 @@
 [build-system]
-requires = ["setuptools>=42", "wheel", "pybind11>=2.6.0"]
+requires = ["setuptools>=61.0", "wheel", "pybind11>=2.10.0", "numpy>=1.20.0"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastsort"
+version = "0.1.0"
+description = "A fast implementation of various insertion sort algorithms using C++"
+authors = [{name = "Shubhajeet Das", email = "dasshubhajeet2017@gmail.com"}]
+requires-python = ">=3.7"
+license = {file = "LICENSE"}
+readme = "README.md"
+dependencies = [
+    "numpy>=1.20.0",
+    "pybind11>=2.10.0"
+]
+
+[tool.setuptools]
+packages = ["fastsort"]
+package-dir = {"fastsort" = "fastsort"}
