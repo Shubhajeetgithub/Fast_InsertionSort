@@ -81,8 +81,8 @@ from matplotlib import pyplot as plt
 
 
 n = np.arange(10, 1000) #x-axis
-y1 = n*n
-y2 = n * np.log(n)
+y1 = n*n / 10000  # scale down to match time units
+y2 = n * np.log(n) / 1000  # scale down to match time units
 y = []
 for num in n:
     arr = np.random.randint(0, 1000, num).tolist()
@@ -104,7 +104,7 @@ In VSCode, press `CTRL+SHIFT+P`, Python>Select Interpreter, and click Virtual en
 source .venv/bin/activate
 .venv/bin/python test.py
 ```
-![Graph](fast_insertion_sort.png)
+![Graph](fast_InsertionSort_pic.png)
 
 ### Option 2: Install from Source
 
