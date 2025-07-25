@@ -89,6 +89,81 @@ Generally:
 - Pairing variants can be faster on modern hardware due to better cache utilization
 - For large arrays, binary search variants typically provide better performance
 
+## Using the Package in Other Projects
+
+There are two ways to use this package in your other projects:
+
+### 1. Install from GitHub
+
+```bash
+# Create and activate a virtual environment in your project directory
+python -m venv .venv
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+
+# Install the package directly from GitHub
+pip install git+https://github.com/Shubhajeetgithub/Fast_InsertionSort.git
+```
+
+### 2. Install in Development Mode
+
+If you want to modify the package while using it:
+
+```bash
+# Create and activate a virtual environment in your project directory
+python -m venv .venv
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+
+# Install in development mode using the path to your clone of the repository
+pip install -e /path/to/Fast_InsertionSort
+```
+
+Then you can use it in your code:
+
+```python
+import numpy as np
+from fastsort import FastInsertionSort
+
+# Create a random array
+arr = np.random.randint(0, 1000, 1000).tolist()
+
+# Initialize sorter
+sorter = FastInsertionSort(arr)
+
+# Use any sorting method
+sorted_arr, time_taken = sorter.binarySearchPairing_insertionSort()
+```
+
+### Example Benchmark Script
+
+Here's a complete example that benchmarks all sorting algorithms:
+
+```python
+import numpy as np
+from fastsort import FastInsertionSort
+import time
+
+def benchmark_sorts(size=1000):
+    # Generate random data
+    arr = np.random.randint(0, 1000, size).tolist()
+    sorter = FastInsertionSort(arr)
+    
+    # Test all algorithms
+    algorithms = [
+        ('Basic', sorter.basic_insertionSort),
+        ('Binary Search', sorter.binarySearch_insertionSort),
+        ('Binary Search Pairing', sorter.binarySearchPairing_insertionSort),
+        ('Pairing', sorter.pairing_insertionSort)
+    ]
+    
+    for name, algorithm in algorithms:
+        sorted_arr, sort_time = algorithm()
+        print(f"{name} Sort Time: {sort_time:.6f} seconds")
+
+if __name__ == "__main__":
+    print("Benchmarking with array size 10000:")
+    benchmark_sorts(10000)
+```
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
