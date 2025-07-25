@@ -73,6 +73,39 @@ python -m venv .venv
 pip install git+https://github.com/Shubhajeetgithub/Fast_InsertionSort.git
 ```
 
+Now create a file `test.py` and write this
+```py
+import numpy as np
+from fastsort import FastInsertionSort
+from matplotlib import pyplot as plt
+
+
+n = np.arange(10, 1000) #x-axis
+y1 = n*n
+y2 = n * np.log(n)
+y = []
+for num in n:
+    arr = np.random.randint(0, 1000, num).tolist()
+    sorter = FastInsertionSort(arr)
+    _, time_taken = sorter.binarySearchPairing_insertionSort()
+    y.append(time_taken)
+
+plt.plot(n, y1, color='red', label="O(n^2)")
+plt.plot(n, y2, color='blue', label="O(nlogn)")
+plt.plot(n, y, color='black', label="Our model")
+plt.title("Time taken for Fast insertion sort")
+plt.xlabel("n")
+plt.ylabel("time")
+plt.legend()
+plt.show()
+```
+In VSCode, press `CTRL+SHIFT+P`, Python>Select Interpreter, and click Virtual environment option. Next install matplotlib in the virtal environment using pip install matplotlib. Then run 
+```bash
+source .venv/bin/activate
+.venv/bin/python test.py
+```
+![Graph](fast_insertion_sort.png)
+
 ### Option 2: Install from Source
 
 #### Ubuntu/Linux:
