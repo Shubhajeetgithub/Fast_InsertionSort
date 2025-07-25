@@ -24,6 +24,14 @@ A Python package implementing four optimized variations of insertion sort in C++
 
 ## Installation
 
+### Requirements
+
+- Python 3.7 or higher
+- numpy >= 1.20.0
+- pybind11 >= 2.10.0
+- C++11 compatible compiler
+- CMake (for building from source)
+
 ### Prerequisites
 
 #### Ubuntu/Linux:
@@ -170,6 +178,7 @@ Each sorting method returns a tuple containing:
 - Time Complexity: O(n²)
 - Space Complexity: O(1)
 
+
 ## Performance
 
 The performance of each algorithm varies depending on:
@@ -181,6 +190,21 @@ Generally:
 - Binary search variants perform fewer comparisons
 - Pairing variants can be faster on modern hardware due to better cache utilization
 - For large arrays, binary search variants typically provide better performance
+
+## Running Tests
+
+To run the test suite:
+
+```bash
+# Ensure you're in your virtual environment
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install test dependencies
+pip install pytest
+
+# Run tests
+pytest tests/test_sort.py -v
+```
 
 ## Using the Package in Other Projects
 
@@ -220,30 +244,48 @@ pip install -e .
 
 ## Quick Start
 
-Here's a simple example to get you started:
+Here's a comprehensive example showing how to use the package:
 
 ```python
 import numpy as np
 from fastsort import FastInsertionSort
 
-# Create sample data
-arr = np.random.randint(0, 1000, 1000).tolist()
+def benchmark_sorting_algorithms(size=1000, max_value=1000):
+    # Create sample data
+    arr = np.random.randint(0, max_value, size).tolist()
+    
+    # Initialize sorter
+    sorter = FastInsertionSort(arr)
+    
+    # Dictionary to store results
+    results = {}
+    
+    # Test all sorting methods
+    results['Basic'] = sorter.basic_insertionSort()
+    results['Binary Search'] = sorter.binarySearch_insertionSort()
+    results['Binary Search Pairing'] = sorter.binarySearchPairing_insertionSort()
+    results['Pairing'] = sorter.pairing_insertionSort()
+    
+    # Verify sorting and print results
+    for name, (sorted_arr, time_taken) in results.items():
+        is_sorted = all(sorted_arr[i] <= sorted_arr[i+1] 
+                       for i in range(len(sorted_arr)-1))
+        print(f"{name:20} Time: {time_taken:8.6f} seconds  "
+              f"{'✓' if is_sorted else '✗'}")
 
-# Initialize sorter
-sorter = FastInsertionSort(arr)
-
-# Try different sorting methods
-basic_sorted, basic_time = sorter.basic_insertionSort()
-binary_sorted, binary_time = sorter.binarySearch_insertionSort()
-binary_pair_sorted, binary_pair_time = sorter.binarySearchPairing_insertionSort()
-pair_sorted, pair_time = sorter.pairing_insertionSort()
-
-# Print results
-print(f"Basic Sort Time: {basic_time:.6f} seconds")
-print(f"Binary Search Sort Time: {binary_time:.6f} seconds")
-print(f"Binary Search Pairing Sort Time: {binary_pair_time:.6f} seconds")
-print(f"Pairing Sort Time: {pair_time:.6f} seconds")
+if __name__ == "__main__":
+    print("Testing with array size 1000:")
+    benchmark_sorting_algorithms(1000)
+    
+    print("\nTesting with array size 10000:")
+    benchmark_sorting_algorithms(10000)
 ```
+
+This script will:
+1. Create random arrays of different sizes
+2. Sort them using all available methods
+3. Verify the sorting is correct
+4. Print timing results for each algorithm
 
 ### Example Benchmark Script
 

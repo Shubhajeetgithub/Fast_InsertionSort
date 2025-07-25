@@ -20,21 +20,12 @@ ext_modules = [
 ]
 
 setup(
+    name="fastsort",
+    version="0.1.0",
+    author="Shubhajeet",
+    description="High-Performance Insertion Sort Variations",
     ext_modules=ext_modules,
     cmdclass={"build_ext": build_ext},
-)
-import pybind11
-
-ext_modules = [
-    Extension(
-        "fastsort.fastsort",
-        ["fastsort/fastsort.cpp"],
-        include_dirs=[pybind11.get_include()],
-        language='c++'
-    ),
-]
-
-setup(
-    ext_modules=ext_modules,
     zip_safe=False,
+    python_requires=">=3.7",
 )
